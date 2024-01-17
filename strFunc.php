@@ -80,6 +80,6 @@ echo "<br><br>";
 
 echo "Convert all first Char in string for givem word will Capital : ".ucwords($str);
 echo "<br><br>";
-?>
+echo "<br><br>";
 
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrj5aWvse9HVNfHwHV2eDI3w5xmQJUQWOMlDQ/KB4Nb41A9dH+5Jr5/wmjzBDT0JAfYBSvOMz7hTyCG539wm+B/MYsEuQo/Vu4txSgGa1DpO6pKywwQ/43FfpQ1OlhGvlm+c2DTP+aqsg0Z3qxCa4C4TBc5pWGa6IrFK91oYB/s8YsHrfVTKQM0V/gpa0BKPzK0k807qi72FaD+cYZUTLj7/WFWgb+kBOApmmbm2Sff0jvgewymiXRJRouHTQ1O98wP18TZbzeHvf3/rFHU7CfqEf0Fn+ovy8cnP8rLYs6qcrG2zJCwktLQtEM7r6rW9yhU2W/07xlFYA3b+bUh254fhtcbMQY6rfHTJ19OI2QHP9IwhQtWTV/juSLHT1/lcU8eiWrnfNXZ+AILOcHaA9Gy/z7Z8iUxxBcEQ6IT9YQaXuYIcOUKi2M47TX6dPiKdBtwwXNUUOZUzgBivl9g5e/wDEdpPtkvZCL+6OulmHmy67kfV93SccWQHg1KK9lyss= jinil
+?>
