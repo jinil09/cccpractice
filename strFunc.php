@@ -1,6 +1,6 @@
 <?php
 
-$str = "Hello This is me!";
+$str = "Hello This is me me!";
 
 echo "Default String is <b>Hello This is me!</b>";
 echo "<br><br>";
@@ -36,7 +36,7 @@ $array1 = explode(",",$str2);
 print_r($array1);
 echo "<br><br>";
 
-$str3 = "<script>alert('Hello, World!');</script>";
+$str3 = "<scrip+t>alert('Hello, World!');</scrip+t>";
 echo "Html special Character : ".htmlspecialchars($str3);
 echo "<br><br>";
 
