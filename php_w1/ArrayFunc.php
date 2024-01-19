@@ -24,12 +24,12 @@
     echo "Combine 2 Arrays (Keys, values) :<br>";
     $keys = ['name', 'age', 'city'];
     $values = ['Jinil', 21, 'Ahmedabad'];
-    $combineArray = array_combine($keys,$values);
+    $combineArray = array_combine($keys,$values); //In this Key and Value size must be same******** 
     print_r($combineArray);
     echo "<br><br>";
 
     echo "Range Of an array :<br>";
-    $namerange = range("1","20",2);
+    $namerange = range("1","20",2);//
     print_r($namerange);
     echo "<br><br>";
 
@@ -168,9 +168,9 @@
     echo "<br><br>";
     
     echo "Iteratively reduces the array to a single value using a callback function :<br>";
-    $sum = array_reduce($array, function ($carry, $item) {
-        return $carry + $item;
-    }, 0);
+    $sum = array_reduce($array, function ($v1, $v2) {
+        return $v1 + $v2;
+    }, 0);// ama Initial Value Nakhvi pade
     echo "Sum is :".$sum;
     echo "<br><br>";
 
@@ -180,9 +180,11 @@
 
     echo "Extracts a portion of the array :<br>";
     $arrayslice = ['a', 'b', 'c', 'd', 'e'];
-    $slicedArray = array_slice($arrayslice, 1, 3);
+    $slicedArray = array_slice($arrayslice, 1, 3);//In this Suppose we take length in negative then (Je Offset hase eaj return karse)
     print_r($slicedArray);
     echo "<br><br>";
+
+    
 
 
 ?>
