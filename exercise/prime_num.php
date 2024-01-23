@@ -92,13 +92,13 @@
 <!-- if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
     $n = $_POST["num"];
-    if (isPrime($n)) {
+    if (primeOrNot($n)) {
         echo "$n is a prime number.";
     } else {
         echo "$n is Not a prime number.";
     }
 }
-    function isPrime($num)
+    function primeOrNot($num)
     {
         if($num < 2)
         {

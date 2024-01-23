@@ -65,25 +65,33 @@
 <?php
 
     $conn = mysqli_connect("localhost","root","","ccc_practice");
+    $err = "";
 
-    if(isset($_POST['submit']))
+    if(!$conn)
     {
-        $productName = $_POST["productName"];
-        $sku = $_POST["sku"];
-        $productType = $_POST["productType"];
-        $category = $_POST["category"];
-        $manufacturerCost = $_POST["manufacturerCost"];
-        $shippingCost = $_POST["shippingCost"];
-        $totalCost = $_POST["totalCost"];
-        $price = $_POST["price"];
-        $status = $_POST["status"];
-        $createdAt = $_POST["createdAt"];
-        $updatedAt = $_POST["updatedAt"];
+        echo "There is Some Error in Connection";
+    }else{
 
-        $sql = "INSERT INTO ccc_product (product_name, sku, product_type, category, manufacturer_cost, shipping_cost, total_cost, price, status, created_at, updated_at) 
-            VALUES ('$productName', '$sku', '$productType', '$category', $manufacturerCost, $shippingCost, $totalCost, $price, '$status', '$createdAt', '$updatedAt')";
-        mysqli_query($conn,$sql);
+        if(isset($_POST['submit']))
+        {
+            $productName = $_POST["productName"];
+            $sku = $_POST["sku"];
+            $productType = $_POST["productType"];
+            $category = $_POST["category"];
+            $manufacturerCost = $_POST["manufacturerCost"];
+            $shippingCost = $_POST["shippingCost"];
+            $totalCost = $_POST["totalCost"];
+            $price = $_POST["price"];
+            $status = $_POST["status"];
+            $createdAt = $_POST["createdAt"];
+            $updatedAt = $_POST["updatedAt"];
+    
+            $sql = "INSERT INTO ccc_product (product_name, sku, product_type, category, manufacturer_cost, shipping_cost, total_cost, price, status, created_at, updated_at) 
+                VALUES ('$productName', '$sku', '$productType', '$category', $manufacturerCost, $shippingCost, $totalCost, $price, '$status', '$createdAt', '$updatedAt')";
+            mysqli_query($conn,$sql);
+        }
     }
+
 
 ?>
 </body>

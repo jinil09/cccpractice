@@ -29,21 +29,28 @@
                 
                 $firstPre = $k;
                 $secondPre = $j;
-                echo "$k, $j,";
 
-                for($i=3;$i<=$n;$i++)
+                if($n == 1)
                 {
-                    if($i<$n)
+                    echo "$k";
+                }else{
+
+                    echo "$k, $j,"; //initial val 0 and 1
+    
+                    for($i=3;$i<=$n;$i++)
                     {
-                        $nextval= $firstPre + $secondPre;
-                        echo " $nextval, ";
-                        $firstPre = $secondPre;
-                        $secondPre = $nextval;
-                    }else{
-                        $nextval= $firstPre + $secondPre;
-                        echo " $nextval ";
-                        $firstPre = $secondPre;
-                        $secondPre = $nextval;
+                        if($i<$n)
+                        {
+                            $nextval= $firstPre + $secondPre;
+                            echo " $nextval, ";
+                            $firstPre = $secondPre;
+                            $secondPre = $nextval;
+                        }else{
+                            $nextval= $firstPre + $secondPre;
+                            echo " $nextval ";
+                            $firstPre = $secondPre;
+                            $secondPre = $nextval;
+                        }
                     }
                 }
             }
@@ -54,12 +61,12 @@
     }
 
     //We can Also Make Using array --> initially We add 0 and 1 and then add one by one
-    // $fibonacciSequence = array();
-    // $fibonacciSequence[] = 0;
-    // $fibonacciSequence[] = 1;
+    // $fb = array();
+    // $fb[] = 0;
+    // $fb[] = 1;
 
     //     for ($i = 2; $i < $n; $i++) {
-    //         $fibonacciSequence[] = $fibonacciSequence[$i - 1] + $fibonacciSequence[$i - 2];
+    //         $fb[] = $fb[$i - 1] + $fb[$i - 2];
     //     }
 ?>
 

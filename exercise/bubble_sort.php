@@ -4,7 +4,7 @@
 
     $numdig = count($arr);
 
-    for ($i = 0;$i < $numdig - 1;$i++)
+    for ($i = 0;$i < $numdig - 1;$i++)//n-1 pass
     {
         for($j=0;$j<$numdig -$i;$j++)
         {
