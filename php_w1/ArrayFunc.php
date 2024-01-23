@@ -20,6 +20,10 @@
     $mergeArray = array_merge($cars,$bikes);
     print_r($mergeArray);
     echo "<br><br>";
+    // $array1 = array("color"=>"red",2,4);
+    // $array2 = array("a", "b", "color" => "green", "shape" => "round", 4);
+    // print_r(array_merge($array1,$array2));echo "<br>";
+    //In this If two array element have same key [Color in above Example] then it return value of last or end node value or we can say override by last value [green as Above example].
 
     echo "Combine 2 Arrays (Keys, values) :<br>";
     $keys = ['name', 'age', 'city'];
@@ -46,7 +50,7 @@
 
     echo "Push element in array :<br>";
     array_push($originalArray, 10);
-    //or
+    //or Even if your array has string keys, your added elements will always have numeric keys
     $originalArray[]= 66;
     print_r($originalArray);
     echo "<br><br>";
@@ -59,7 +63,7 @@
     echo "Add element in array from begining :<br>";
     array_unshift($originalArray, 101);
     print_r($originalArray);
-    echo "<br><br>";
+    echo "<br><br>";//same as Push but here add new Element at starting
 
     echo "Remove element in array from begining :<br>";
     array_shift($originalArray);
