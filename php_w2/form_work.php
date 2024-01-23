@@ -17,13 +17,14 @@
         <input type="text" name="sku" required><br>
 
         <label>Product Type:</label>
-        <input type="radio" id="simpleType" name="productType" value="Simple" checked>
+        <input type="radio" id="simpleType" name="productType" value="Simple">
         <label name="simpleType">Simple</label>
         <input type="radio" id="bundleType" name="productType" value="Bundle">
         <label name="bundleType">Bundle</label><br>
 
         <label name="category">Category:</label>
         <select name="category" required>
+            <option value="">----- Select -----</option>
             <option value="Bar & Game Room">Bar & Game Room</option>
             <option value="Bedroom">Bedroom</option>
             <option value="Decor">Decor</option>
