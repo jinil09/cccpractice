@@ -145,7 +145,7 @@ if(isset($_POST['product']['submit']))
         <select name="product[category]" >
             <option value="">----- Select -----</option>
             <?php foreach($cetegories as $cetegories) :?>
-                <option value="<?= $cetegories['cat_id']?>"><?= $cetegories['name']?></option>
+                <option value="<?= $cetegories['cat_id']?>" <?= (isset($product) && $product['category'] == $cetegories['cat_id']) ? 'selected' : '' ?>><?= $cetegories['name']?></option>
             <?php endforeach;?>
         </select><br>
 
@@ -173,7 +173,7 @@ if(isset($_POST['product']['submit']))
         <label name="updatedAt">Updated At: </label>
         <input type="date" name="product[updated_at]" value="<?= isset($product) ? $product['updated_at'] : '' ?>"><br>
 
-        <input type="submit" value="Submit" name="product[submit]">
+        <input type="submit" value="<?= (isset($product)&&isset($_GET['edit'])) ? 'Update' : 'Submit' ?>" name="product[submit]">
     </form>
 
     <a style="margin:30px;" href="product_list.php">Want to See Product List, Click Here</a>

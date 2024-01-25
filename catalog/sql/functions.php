@@ -19,19 +19,6 @@ include('connection.php');
         }
         return $conn->query($sql);
     }
-    // function deleteData($table_name,$whereCondi)
-    // {
-    //     global $conn;
-    //     $condiData = [];
-    //     foreach ($whereCondi as $Wcol => $Wval) {
-    //         $condiData[] = "`$Wcol` = '".addslashes($Wval)."'";
-    //     }
-
-    //     $condiData = implode(" AND ", $condiData);
-    //     echo "DELETE FROM {$table_name} WHERE {$condiData};";
-    // }
-
-
 
     function getproductData($values)
     { 
