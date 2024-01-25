@@ -2,12 +2,6 @@
 
 include('connection.php');
 
-    function updateData($product_id,$productName, $sku, $category, $price){
-        global $conn;
-        $sql = "UPDATE ccc_product SET product_name='$productName', sku='$sku', category='$category', price=$price WHERE id=$product_id";
-        return $conn->query($sql);
-    }
-
     function deleteData($table_name,$id){
         global $conn;
         if($table_name == 'ccc_product')
@@ -22,8 +16,6 @@ include('connection.php');
 
     function getproductData($values)
     { 
-        // var_dump($_POST['product']);
-        // exit;
         return $_POST['product'][$values];
     }
 
@@ -43,7 +35,14 @@ include('connection.php');
     }
 
 
-    // $productName, $sku, $productType, $category, $manufacturerCost, $shippingCost, $totalCost, $price, $status, $createdAt, $updatedAt
+    function selectData($table_name, $addCondi=[], $limit=[]){
+        global $conn;
+
+        $sql = "SELECT * FROM {$table_name} {$addCondi} {$limit}";
+        $result = $conn -> query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
 
     function updateDataa($table_name,$data,$whereCondi){
         global $conn;

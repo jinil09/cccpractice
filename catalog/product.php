@@ -131,6 +131,13 @@ if(isset($_POST['product']['submit']))
             margin:3rem;
             text-decoration: underline;
         }
+        .radioC{
+            display:flex;
+            align-items: center;
+            /* justify-content: center; */
+            margin:1rem;
+            gap:50px;
+        }
     </style>
     
 </head> 
@@ -146,10 +153,13 @@ if(isset($_POST['product']['submit']))
         <input type="text" name="product[sku]" value="<?= isset($product) ? $product['sku'] : '' ?>"><br>
 
         <label>Product Type: </label>
-        <input type="radio" id="simpleType" name="product[product_type]" value="Simple" <?= (isset($product)&&($product['product_type'] == "Simple")) ? 'checked' : '' ?>  >
-        <label name="simpleType">Simple</label>
-        <input type="radio" id="bundleType" name="product[product_type]" value="Bundle" <?= (isset($product)&&($product['product_type'] == "Bundle")) ? 'checked' : '' ?>>
-        <label name="bundleType">Bundle</label><br>
+        <div class="radioC">
+            <input type="radio" id="simpleType" name="product[product_type]" value="Simple" <?= (isset($product)&&($product['product_type'] == "Simple")) ? 'checked' : '' ?>  >
+            <label name="simpleType">Simple</label>
+            <input type="radio" id="bundleType" name="product[product_type]" value="Bundle" <?= (isset($product)&&($product['product_type'] == "Bundle")) ? 'checked' : '' ?>>
+            <label name="bundleType">Bundle</label><br>
+
+        </div>
 
         <label name="category">Category: </label>
         <select name="product[category]" >

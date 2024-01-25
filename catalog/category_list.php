@@ -16,7 +16,7 @@ if(isset($_GET['delete'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Category List</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -36,7 +36,7 @@ if(isset($_GET['delete'])){
         }
 
         table {
-            width: 80%;
+            width: 60%;
             margin: 20px auto;
             border-collapse: collapse;
             background-color: #fff;
@@ -69,16 +69,16 @@ if(isset($_GET['delete'])){
     </style>
 </head>
 <body>
-    <h2>Product List</h2>
+    <h2>Category List</h2>
     <table border="1">
         <tr>
-            <th>Product Name</th>
+            <th>Cat_Id</th>
             <th>Category List</th>
             <th>Delete</th>
         </tr>
         <?php foreach ($cetegories as $cetegories): ?>
             <tr>
-                <td><?= $cetegories['cat_id'] ?></td>
+                <td style="width:50px;"><?= $cetegories['cat_id'] ?></td>
                 <td><?= $cetegories['name'] ?></td>
                 
                 <td><a href="category_list.php?delete=<?= $cetegories['cat_id'] ?>">Delete</a></td>

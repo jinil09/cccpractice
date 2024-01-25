@@ -79,6 +79,7 @@ $cetegories= getCategories();
     <table border="1">
         <tr>
             <th>Product Name</th>
+            <th>Product Id</th>
             <th>SKU</th>
             <th>Category</th>
             <th>Edit</th>
@@ -86,6 +87,7 @@ $cetegories= getCategories();
         </tr>
         <?php foreach ($products as $product): ?>
             <tr>
+                <td style="width:30px"><?= $product['id'] ?></td>
                 <td><?= $product['product_name'] ?></td>
                 <td><?= $product['sku'] ?></td>
                 <td><?php 
