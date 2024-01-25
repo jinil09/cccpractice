@@ -86,5 +86,6 @@ $products = getProducts();
     </table>
 
     <?php echo "<a href='product.php'>If you want to Insert New Data, Click Here</a>"?>
+    <?php echo "<a style='margin-top:10px;' href='category_list.php'>If you want to See all Category, Click Here</a>"?>
 </body>
 </html>

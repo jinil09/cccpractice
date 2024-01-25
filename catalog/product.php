@@ -1,22 +1,22 @@
-
 <?php
 
 include('sql/functions.php');
+$cetegories = getCategories();
 
 if(isset($_GET['edit']))
 {
     $product_id = $_GET['edit'];
     $product = $conn -> query("SELECT * FROM ccc_product WHERE id=$product_id")->fetch_assoc();
-    var_dump($product);
+    // var_dump($product);
 }
 if(isset($_GET['delete']))
 {
     $product_id = $_GET['delete'];
     // $product = $conn -> query("SELECT * FROM ccc_product WHERE id=$product_id")->fetch_assoc();
-    deleteData($product_id);
+    deleteData("ccc_product",$product_id);
     echo "Delete Data(Id value = {$product_id}) Succsessfully";
     header('Location: product_list.php');
-    var_dump($product['id']);
+    // var_dump($product['id']);
 }
 
 if(isset($_POST['product']['submit']))
@@ -43,8 +43,9 @@ if(isset($_POST['product']['submit']))
                 echo "Update Data(Id value = {$product_id}) Succsessfully";
             }
             else{
-                $sql = "INSERT INTO ccc_product VALUES ('','$productName', '$sku', '$productType', '$category', $manufacturerCost, $shippingCost, $totalCost, $price, '$status', '$createdAt', '$updatedAt')";
-                mysqli_query($conn,$sql);
+                // $sql = "INSERT INTO ccc_product VALUES ('','$productName', '$sku', '$productType', '$category', $manufacturerCost, $shippingCost, $totalCost, $price, '$status', '$createdAt', '$updatedAt')";
+                // mysqli_query($conn,$sql);
+                insertData("ccc_product",$productData);
                 echo "Data Send Database Succsessfully<br>";
             }
         }
@@ -77,7 +78,7 @@ if(isset($_POST['product']['submit']))
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 600px;
             max-width: 100%;
-            margin-bottom:5rem;
+            margin-bottom:3rem;
         }
 
         h1 {
@@ -143,15 +144,9 @@ if(isset($_POST['product']['submit']))
         <label name="category">Category: </label>
         <select name="product[category]" >
             <option value="">----- Select -----</option>
-            <option value="Bar & Game Room">Bar & Game Room</option>
-            <option value="Bedroom">Bedroom</option>
-            <option value="Decor">Decor</option>
-            <option value="Dining & Kitchen">Dining & Kitchen</option>
-            <option value="Lighting">Lighting</option>
-            <option value="Living Room">Living Room</option>
-            <option value="Mattresses">Mattresses</option>
-            <option value="Office">Office</option>
-            <option value="Outdoor">Outdoor</option>
+            <?php foreach($cetegories as $cetegories) :?>
+                <option value="<?= $cetegories['cat_id']?>"><?= $cetegories['name']?></option>
+            <?php endforeach;?>
         </select><br>
 
         <label name="manufacturerCost">Manufacturer Cost: </label>
@@ -181,7 +176,7 @@ if(isset($_POST['product']['submit']))
         <input type="submit" value="Submit" name="product[submit]">
     </form>
 
-    
+    <a style="margin:30px;" href="product_list.php">Want to See Product List, Click Here</a>
 
 </body>
 </html>

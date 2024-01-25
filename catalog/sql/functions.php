@@ -8,11 +8,28 @@ include('connection.php');
         return $conn->query($sql);
     }
 
-    function deleteData($product_id){
+    function deleteData($table_name,$id){
         global $conn;
-        $sql = "DELETE FROM ccc_product WHERE id=$product_id";
+        if($table_name == 'ccc_product')
+        {
+            $sql = "DELETE FROM {$table_name} WHERE id=$id";
+        }else{
+
+            $sql = "DELETE FROM {$table_name} WHERE cat_id=$id";
+        }
         return $conn->query($sql);
     }
+    // function deleteData($table_name,$whereCondi)
+    // {
+    //     global $conn;
+    //     $condiData = [];
+    //     foreach ($whereCondi as $Wcol => $Wval) {
+    //         $condiData[] = "`$Wcol` = '".addslashes($Wval)."'";
+    //     }
+
+    //     $condiData = implode(" AND ", $condiData);
+    //     echo "DELETE FROM {$table_name} WHERE {$condiData};";
+    // }
 
 
 
@@ -35,7 +52,7 @@ include('connection.php');
         global $conn;
         $sql = "SELECT * FROM ccc_category";
         $result = $conn -> query($sql);
-        return $result -> fetch_all(MYSQL_ASSOC);
+        return $result -> fetch_all(MYSQLI_ASSOC);
     }
 
 
@@ -55,6 +72,22 @@ include('connection.php');
          $col_valData = implode(", ",$col_valData);
 
         $sql="UPDATE {$table_name} SET {$col_valData} WHERE id=$whereCondi;";
+        return $conn->query($sql);
+    }
+
+    function insertData($tableName,$data){
+        global $conn;
+        $columns = $values = [];
+        foreach ($data as $col => $val) {
+            if($col=='submit') continue;
+            $columns [] = "`$col`";
+            $values [] = "'".addslashes($val)."'";
+        }
+
+        $columns = implode(", ",$columns);
+        $values = implode(", ",$values);
+        
+        $sql ="INSERT INTO {$tableName}({$columns}) VALUES({$values});";
         return $conn->query($sql);
     }
 ?>
