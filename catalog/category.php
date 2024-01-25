@@ -26,12 +26,14 @@ if(isset($_POST['submit'])){
             margin: 0;
             padding: 0;
             display: flex;
+            flex-flow:column;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
 
         form {
+            width:500px;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -67,13 +69,22 @@ if(isset($_POST['submit'])){
             color: #ff0000;
             margin-bottom: 10px;
         }
+        .anch{
+            display:flex;
+            gap:20px
+        }
     </style>
 </head>
 <body>
     <form action="" method="POST">
-        <label for="name">Name</label>
+        <label for="name">Category Name</label>
         <input type="text" name="name">
         <input type="submit" value="submit" name="submit">
     </form>
+    <div class="anch">
+
+        <a style="margin:30px;" href="product_list.php">Product List</a>
+        <a style="margin:30px;" href="category_list.php">Category List</a>
+    </div>
 </body>
 </html>

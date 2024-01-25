@@ -46,7 +46,8 @@ if(isset($_POST['product']['submit']))
                 // $sql = "INSERT INTO ccc_product VALUES ('','$productName', '$sku', '$productType', '$category', $manufacturerCost, $shippingCost, $totalCost, $price, '$status', '$createdAt', '$updatedAt')";
                 // mysqli_query($conn,$sql);
                 insertData("ccc_product",$productData);
-                echo "Data Send Database Succsessfully<br>";
+                // echo "Data Send Database Succsessfully<br>";
+                echo '<script>alert("Product Data Send Database successfully!");</script>';
             }
         }
 ?>
@@ -121,6 +122,15 @@ if(isset($_POST['product']['submit']))
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        .anch{
+            /* width:100%; */
+            display:flex;
+            justify-content:space-evenly;
+            /* gap:50px; */
+            font-size:18px;
+            margin:3rem;
+            text-decoration: underline;
+        }
     </style>
     
 </head> 
@@ -174,9 +184,12 @@ if(isset($_POST['product']['submit']))
         <input type="date" name="product[updated_at]" value="<?= isset($product) ? $product['updated_at'] : '' ?>"><br>
 
         <input type="submit" value="<?= (isset($product)&&isset($_GET['edit'])) ? 'Update' : 'Submit' ?>" name="product[submit]">
+        <div class="anch">
+            <a href='category_list.php'>See all Category</a>
+            <a href="product_list.php">Product List</a>
+        </div>
     </form>
 
-    <a style="margin:30px;" href="product_list.php">Want to See Product List, Click Here</a>
 
 </body>
 </html>

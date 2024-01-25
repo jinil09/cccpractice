@@ -3,6 +3,8 @@ include('sql/functions.php');
 // echo "<pre>";
 $products = getProducts();
 // var_dump($products);
+$cetegories= getCategories();
+// var_dump($cetegories);
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +23,7 @@ $products = getProducts();
             flex-flow:column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: auto;
         }
 
         h2 {
@@ -60,6 +62,16 @@ $products = getProducts();
         a:hover {
             text-decoration: underline;
         }
+
+        .anch{
+            width:100%;
+            display:flex;
+            justify-content:space-evenly;
+            /* gap:50px; */
+            font-size:20px;
+            margin:3rem;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -76,7 +88,16 @@ $products = getProducts();
             <tr>
                 <td><?= $product['product_name'] ?></td>
                 <td><?= $product['sku'] ?></td>
-                <td><?= $product['category'] ?></td>
+                <td><?php 
+                foreach($cetegories as $cat)
+                {
+                    if($cat['cat_id'] == $product['category'])
+                    {
+                        echo $cat['name'];
+                    }
+                }
+                
+                ?></td>
                 <td><a href="product.php?edit=<?= $product['id'] ?>">Edit</a></td>
                 <td><a href="product.php?delete=<?= $product['id'] ?>">Delete</a></td>
                 
@@ -85,7 +106,11 @@ $products = getProducts();
         <?php endforeach; ?>
     </table>
 
-    <?php echo "<a href='product.php'>If you want to Insert New Data, Click Here</a>"?>
-    <?php echo "<a style='margin-top:10px;' href='category_list.php'>If you want to See all Category, Click Here</a>"?>
+    <div class="anch">
+        
+        <a href='product.php'>Insert New Data</a>
+        <a href='category_list.php'>See all Category</a>
+    </div>
+   
 </body>
 </html>
