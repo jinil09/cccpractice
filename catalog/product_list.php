@@ -1,10 +1,7 @@
 <?php
 include('sql/functions.php');
-// echo "<pre>";
-$products = getProducts();
-// var_dump($products);
-$cetegories= getCategories();
-// var_dump($cetegories);
+$productData = selectData("ccc_product",["ORDER BY"=>"id DESC"]);
+$catData= selectData("ccc_category");
 ?>
 
 <!DOCTYPE html>
@@ -85,25 +82,23 @@ $cetegories= getCategories();
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <?php foreach ($products as $product): ?>
+        <?php foreach ($productData as $product): ?>
             <tr>
                 <td style="width:30px"><?= $product['id'] ?></td>
                 <td><?= $product['product_name'] ?></td>
                 <td><?= $product['sku'] ?></td>
                 <td><?php 
-                foreach($cetegories as $cat)
+                foreach($catData as $cat)
                 {
                     if($cat['cat_id'] == $product['category'])
                     {
-                        echo $cat['name'];
+                        echo $cat['name']; //Logic to print Category name Using Cat_id Valaue
                     }
                 }
                 
                 ?></td>
                 <td><a href="product.php?edit=<?= $product['id'] ?>">Edit</a></td>
                 <td><a href="product.php?delete=<?= $product['id'] ?>">Delete</a></td>
-                
-                <!-- <td><form method="POST"><input type="submit" value="delete"></form></td> -->
             </tr>
         <?php endforeach; ?>
     </table>

@@ -2,65 +2,7 @@
 
 include('connection.php');
 
-    function deleteData($table_name,$id){
-        global $conn;
-        if($table_name == 'ccc_product')
-        {
-            $sql = "DELETE FROM {$table_name} WHERE id=$id";
-        }else{
-
-            $sql = "DELETE FROM {$table_name} WHERE cat_id=$id";
-        }
-        return $conn->query($sql);
-    }
-
-    function getproductData($values)
-    { 
-        return $_POST['product'][$values];
-    }
-
-    function getProducts(){
-        global $conn;
-        $sql = "SELECT * FROM ccc_product ORDER BY id DESC LIMIT 10";
-        $result = $conn->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
-  
-    }
-
-    function getCategories(){
-        global $conn;
-        $sql = "SELECT * FROM ccc_category";
-        $result = $conn -> query($sql);
-        return $result -> fetch_all(MYSQLI_ASSOC);
-    }
-
-
-    function selectData($table_name, $addCondi=[], $limit=[]){
-        global $conn;
-
-        $sql = "SELECT * FROM {$table_name} {$addCondi} {$limit}";
-        $result = $conn -> query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-
-    function updateDataa($table_name,$data,$whereCondi){
-        global $conn;
-        $col_valData = $condiData = [];
-        foreach ($data as $col => $val) {
-            if($col=='submit') continue;
-            $col_valData[] = "`$col` = '".addslashes($val)."'";
-         }
-        //  foreach ($whereCondi as $Wcol => $Wval) {  
-        //     $condiData[] = "`$Wcol` = '$Wval'";
-        //  }
-        
-         $col_valData = implode(", ",$col_valData);
-
-        $sql="UPDATE {$table_name} SET {$col_valData} WHERE id=$whereCondi;";
-        return $conn->query($sql);
-    }
-
+//Insert Data
     function insertData($tableName,$data){
         global $conn;
         $columns = $values = [];
@@ -76,4 +18,61 @@ include('connection.php');
         $sql ="INSERT INTO {$tableName}({$columns}) VALUES({$values});";
         return $conn->query($sql);
     }
+
+//Update Data
+    function updateData($table_name,$data,$whereCondi){
+        global $conn;
+        $col_valData = $condiData = [];
+        foreach ($data as $col => $val) {
+            if($col=='submit') continue;
+            $col_valData[] = "`$col` = '".addslashes($val)."'";
+         }
+         foreach ($whereCondi as $Wcol => $Wval) {  
+            $condiData[] = "`$Wcol` = '$Wval'";
+         }
+        
+         $col_valData = implode(", ",$col_valData);
+         $condiData = implode(" AND ", $condiData);
+
+        $sql="UPDATE {$table_name} SET {$col_valData} WHERE {$condiData};";
+        return $conn->query($sql);
+    }
+
+
+//select Data
+    function selectData($table_name, $addField1 = [])
+    {
+        global $conn;
+        $addF1=[];
+        foreach ($addField1 as $key => $value) {
+            $addF1[] = "$key $value";
+        }
+        
+        $addF1 = implode(" ",$addF1);
+        $sql = "SELECT * FROM {$table_name} {$addF1};";
+        // echo $sql;
+        $result=$conn->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+//Delete Data
+    function deleteData($table_name,$whereCondi){
+        global $conn;
+        $WCondi = [];
+
+        foreach ($whereCondi as $col => $val) {
+            $WCondi[] = "`$col` = '$val'";
+        }
+        $WCondi = implode(" AND ",$WCondi);
+        $sql= "DELETE FROM {$table_name} WHERE {$WCondi};";
+        return $conn->query($sql);
+    }
+
+
+//Get Data Function
+    function getproductData($values)
+    { 
+        return $_POST['product'][$values];
+    }
+
 ?>

@@ -1,12 +1,10 @@
 <?php
 include('sql/functions.php');
-// echo "<pre>";
-$cetegories = getCategories();
-// var_dump($products);
+$catData = selectData("ccc_category");
 
 if(isset($_GET['delete'])){
     $cat_id = $_GET['delete'];
-    deleteData("ccc_category",$cat_id);
+    deleteData("ccc_category",["cat_id"=>$cat_id]);
     echo "Delete category(Id value = {$cat_id}) Succsessfully";
 }
 ?>
@@ -76,14 +74,11 @@ if(isset($_GET['delete'])){
             <th>Category List</th>
             <th>Delete</th>
         </tr>
-        <?php foreach ($cetegories as $cetegories): ?>
+        <?php foreach ($catData as $cat): ?>
             <tr>
-                <td style="width:50px;"><?= $cetegories['cat_id'] ?></td>
-                <td><?= $cetegories['name'] ?></td>
-                
-                <td><a href="category_list.php?delete=<?= $cetegories['cat_id'] ?>">Delete</a></td>
-                
-                <!-- <td><form method="POST"><input type="submit" value="delete"></form></td> -->
+                <td style="width:50px;"><?= $cat['cat_id'] ?></td>
+                <td><?= $cat['name'] ?></td>
+                <td><a href="category_list.php?delete=<?= $cat['cat_id'] ?>">Delete</a></td> 
             </tr>
         <?php endforeach; ?>
     </table>

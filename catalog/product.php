@@ -1,22 +1,19 @@
 <?php
 
 include('sql/functions.php');
-$cetegories = getCategories();
+$catData = selectData("ccc_category");
 
 if(isset($_GET['edit']))
 {
     $product_id = $_GET['edit'];
     $product = $conn -> query("SELECT * FROM ccc_product WHERE id=$product_id")->fetch_assoc();
-    // var_dump($product);
 }
 if(isset($_GET['delete']))
 {
     $product_id = $_GET['delete'];
-    // $product = $conn -> query("SELECT * FROM ccc_product WHERE id=$product_id")->fetch_assoc();
-    deleteData("ccc_product",$product_id);
+    deleteData("ccc_product",["id"=>$product_id]);
     echo "Delete Data(Id value = {$product_id}) Succsessfully";
     header('Location: product_list.php');
-    // var_dump($product['id']);
 }
 
 if(isset($_POST['product']['submit']))
@@ -33,20 +30,16 @@ if(isset($_POST['product']['submit']))
             $createdAt = getProductData("created_at");
             $updatedAt = getProductData("updated_at");
         
-            $productData = $_POST['product'];
+            $productData = $_POST['product'];//Main data --> Form Capture
 
             if(isset($_GET['edit'])){
                 $product_id = $_GET['edit'];
                 $product = $conn -> query("SELECT * FROM ccc_product WHERE id=$product_id")->fetch_assoc();
-                // updateData($product['id'],$productName, $sku, $category, $price);
-                updateDataa("ccc_product",$productData,$product['id']);
+                updateData("ccc_product",$productData,["id"=>$product_id]);
                 echo "Update Data(Id value = {$product_id}) Succsessfully";
             }
             else{
-                // $sql = "INSERT INTO ccc_product VALUES ('','$productName', '$sku', '$productType', '$category', $manufacturerCost, $shippingCost, $totalCost, $price, '$status', '$createdAt', '$updatedAt')";
-                // mysqli_query($conn,$sql);
                 insertData("ccc_product",$productData);
-                // echo "Data Send Database Succsessfully<br>";
                 echo '<script>alert("Product Data Send Database successfully!");</script>';
             }
         }
@@ -123,10 +116,8 @@ if(isset($_POST['product']['submit']))
             background-color: #45a049;
         }
         .anch{
-            /* width:100%; */
             display:flex;
             justify-content:space-evenly;
-            /* gap:50px; */
             font-size:18px;
             margin:3rem;
             text-decoration: underline;
@@ -134,7 +125,6 @@ if(isset($_POST['product']['submit']))
         .radioC{
             display:flex;
             align-items: center;
-            /* justify-content: center; */
             margin:1rem;
             gap:50px;
         }
@@ -164,8 +154,8 @@ if(isset($_POST['product']['submit']))
         <label name="category">Category: </label>
         <select name="product[category]" >
             <option value="">----- Select -----</option>
-            <?php foreach($cetegories as $cetegories) :?>
-                <option value="<?= $cetegories['cat_id']?>" <?= (isset($product) && $product['category'] == $cetegories['cat_id']) ? 'selected' : '' ?>><?= $cetegories['name']?></option>
+            <?php foreach($catData as $cat) :?>
+                <option value="<?= $cat['cat_id']?>" <?= (isset($product) && $product['category'] == $cat['cat_id']) ? 'selected' : '' ?>><?= $cat['name']?></option>
             <?php endforeach;?>
         </select><br>
 
@@ -183,8 +173,8 @@ if(isset($_POST['product']['submit']))
 
         <label name="status">Status: </label>
         <select name="product[status]" >
-            <option value="Enabled">Enabled</option>
-            <option value="Disabled">Disabled</option>
+            <option value="Enabled" <?=(isset($product)&&($product['status'] == 'Enabled')) ? 'selected' : ''?>>Enabled</option>
+            <option value="Disabled" <?=(isset($product)&&($product['status'] == 'Disabled')) ? 'selected' : ''?>>Disabled</option>
         </select><br>
 
         <label name="createdAt">Created At: </label>

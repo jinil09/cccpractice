@@ -1,15 +1,11 @@
 <?php
 include('sql/connection.php');
 include('sql/functions.php');
-// $categories = getCategories();
-
 
 if(isset($_POST['submit'])){
     $CatData = $_POST;
     $name = $_POST['name'];
     insertData("ccc_category",$CatData);
-    // $sql = "INSERT INTO ccc_category VALUES ('','$name')";
-    // mysqli_query($conn,$sql);
 }
 ?>
 
@@ -82,7 +78,6 @@ if(isset($_POST['submit'])){
         <input type="submit" value="submit" name="submit">
     </form>
     <div class="anch">
-
         <a style="margin:30px;" href="product_list.php">Product List</a>
         <a style="margin:30px;" href="category_list.php">Category List</a>
     </div>
