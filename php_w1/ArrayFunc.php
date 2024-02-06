@@ -184,7 +184,7 @@
 
     echo "Extracts a portion of the array :<br>";
     $arrayslice = ['a', 'b', 'c', 'd', 'e'];
-    $slicedArray = array_slice($arrayslice, 1, 3);//In this Suppose we take length in negative then (Je Offset hase eaj return karse)
+    $slicedArray = array_slice($arrayslice, -2, 3);//In this Suppose we take length in negative then (Je Offset hase eaj return karse)
     print_r($slicedArray);
     echo "<br><br>";
 

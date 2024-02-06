@@ -65,7 +65,7 @@ echo "<br><br>";
 echo "String padding with specific val : ".str_pad($str, 30, "*", STR_PAD_BOTH);
 echo "<br><br>";
 
-echo "Locale based string comparison : ".strcoll($str, $str1);
+echo "Locale based string comparison -----------------------------------------------: ".strcoll($str, $str1);
 echo "<br><br>";
 
 $mask = "iou";
