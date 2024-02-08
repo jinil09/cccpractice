@@ -9,8 +9,12 @@ class Mage{
 
         // $uri = new Core_Model_Request();
         // $uriName = $uri->getRequestUri();
-        $request = Mage::getModel('core/request');
-        echo $request->getRequestUri();
+
+        $frontController = new Core_Controller_Front();
+        $frontController->init();
+
+        // $request = Mage::getModel('core/request');
+        // echo $request->getRequestUri();
 
     }
 

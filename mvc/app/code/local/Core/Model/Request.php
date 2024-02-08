@@ -3,9 +3,19 @@
 
 class Core_Model_Request{
 
-    public function __construct(){
-        // echo "Jinil";
-    }
+    
+    protected $_moduleName;
+    protected $_controllerName;
+    protected $_actionName;
+
+    public function __construct()
+	{
+		$uri = $this->getRequestUri();
+		$uri = explode("/", $uri);
+		$this->_moduleName = $uri[0];
+		$this->_controllerName = $uri[1];
+		$this->_actionName = $uri[2];
+	}
 
 
     public function getParams($key= ''){
@@ -53,5 +63,22 @@ class Core_Model_Request{
             return $uri;
         }
         return $uri;
+    }
+
+    public function getActionName(){
+        return $this->_actionName;
+    }
+    public function getControllerName(){
+        return $this->_controllerName;
+    }
+    public function getModuleName(){
+        return $this->_moduleName;
+    }
+
+
+    public function getFullControllerClass(){
+        $strClass = $this->_moduleName.'_Controller_'.$this->_controllerName;
+        $strClass = ucwords($strClass,"_");
+        return $strClass;
     }
 }
