@@ -101,6 +101,11 @@ class View_Product{
     }
 
     public function toHtml(){
-    	return $this->createForm();
+        $tHtm = $this->createForm();
+        $tHtm .= '<div class="anch">';
+        $tHtm .= '<a href="productlist">Show Data</a>';
+        $tHtm .= '<a href="categorylist">See Category Data</a>';
+        $tHtm .= '</div>';
+    	return $tHtm;
     }
 }

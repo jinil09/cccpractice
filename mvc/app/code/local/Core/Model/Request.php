@@ -1,7 +1,7 @@
 <?php
 
 
-class Model_Request{
+class Core_Model_Request{
 
     public function __construct(){
         // echo "Jinil";
@@ -41,9 +41,9 @@ class Model_Request{
         return false;
     }
 
-    public function getUri(){
+    public function getRequestUri(){
         $uri = $_SERVER['REQUEST_URI'];
-        $uri = str_replace("/Practice/catalog_ClassObj/","",$uri);
+        $uri = str_replace("/Practice/mvc/","",$uri);
         if(str_contains($uri, '?'))
         {
             $pos = strpos($uri, '?');

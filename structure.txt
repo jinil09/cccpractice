@@ -1,0 +1,75 @@
+Root Folder
+    /app/code/local
+            /Product/
+                /Model
+                /Controller
+                /View
+            /Customer
+                /Model
+                /Controller
+                /View
+        /design/frontend/tempalte/
+            /product
+                /form.phtml
+                /list.phtml
+                /grid.phtml
+            /customer/
+                /form.phtml
+                /list.phtml
+                /address/
+                    form.phtml
+                
+url: https://localhost/my_folder_root_directory/
+
+    product/index/new
+    product/index/list
+    product/index/save
+    product/index/delete
+
+    coustomer/index/new
+    coustomer/index/list
+    coustomer/index/save
+    coustomer/index/delete
+
+    coustomer/address/new
+    coustomer/address/list
+    coustomer/address/save
+    coustomer/address/delete
+
+    coustomer/quote_address/new
+    coustomer/quote_address/list
+    coustomer/quote_address/save
+    coustomer/quote_address/delete
+
+
+Controller file name quote/address/xyz
+
+Basic Page->Html(head,Body,Footer) ==> Module->Page->HTML Blank structure
+
+
+---------------------------------------------------------------------------
+
+Root Folder
+├── app
+│   └── code
+│       └── local
+│           ├── Product
+│           │   ├── Model
+│           │   ├── Controller
+│           │   └── View
+│           └── Customer
+│               ├── Model
+│               ├── Controller
+│               └── View
+└── design
+    └── frontend
+        └── template
+            ├── product
+            │   ├── form.phtml
+            │   ├── list.phtml
+            │   └── grid.phtml
+            └── customer
+                ├── form.phtml
+                ├── list.phtml
+                └── address
+                    └── form.phtml

@@ -1,6 +1,6 @@
 <?php
 
-class View_Productlist{
+class View_Product_List{
 
     
     public function createTable(){
@@ -31,8 +31,8 @@ class View_Productlist{
                }
             }
             $table .= $catt;
-            $table .= '<td><a href="product?id=' . $product['id'] . '">Edit</a></td>';
-            $table .= '<td><a href="delete?delete=' . $product['id'] . '">Delete</a></td>';
+            $table .= '<td><a href="?id=' . $product['id'] . '">Edit</a></td>';
+            $table .= '<td><a href="?delete=' . $product['id'] . '">Delete</a></td>';
             $table .= '</tr>';
         }
 
@@ -46,8 +46,8 @@ class View_Productlist{
         $tHtm = $this->createTable();
         echo "Hello";
         $tHtm .= '<div class="anch">';
-        $tHtm .= '<a href="product">Insert Data</a>';
-        $tHtm .= '<a href="categorylist">See Category Data</a>';
+        $tHtm .= '<a href="./../product">Insert Data</a>';
+        $tHtm .= '<a href="./../categorylist">See Category Data</a>';
         $tHtm .= '</div>';
         return $tHtm;
     }

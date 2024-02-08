@@ -1,6 +1,6 @@
 <?php
 
-class View_CategoryList{
+class View_Categorylist{
 
 
     public function createTable(){
@@ -19,7 +19,7 @@ class View_CategoryList{
             $table .= '<tr>';
             $table .= '<td style="width:30px">' . $cat['cat_id'] . '</td>';
             $table .= '<td>' . $cat['name'] . '</td>';
-            $table .= '<td><a href="?delete=' . $cat['cat_id'] . '">Delete</a></td>';
+            $table .= '<td><a href="delete?delete=' . $cat['cat_id'] . '">Delete</a></td>';
             $table .= '</tr>';
         }
 
@@ -32,8 +32,8 @@ class View_CategoryList{
     public function toHtml(){
         $tHtm = $this->createTable();
         $tHtm .= '<div class="anch">';
-        $tHtm .= '<a href="product_list">Product List</a>';
-        $tHtm .= '<a href="categoryInsertData">Insert Category Data</a>';
+        $tHtm .= '<a href="productlist">Product List</a>';
+        $tHtm .= '<a href="category">Insert Category Data</a>';
         $tHtm .= '</div>';
         return $tHtm;
     }
