@@ -1,0 +1,105 @@
+SELECT with ORDER BY, GROUP BY, LIMIT, and WHERE:
+-------------------------------------------------
+SELECT product_name, price
+FROM ccc_product
+WHERE product_type = 'Simple'
+ORDER BY price DESC
+LIMIT 5;
+
+JOIN Tables:
+------------
+SELECT product_name, price, name as category_name
+FROM ccc_product
+JOIN ccc_category ON ccc_product.category = ccc_category.cat_id;
+
+
+UPDATE with JOIN and WHERE:
+---------------------------
+UPDATE ccc_product
+JOIN ccc_category ON ccc_product.category = ccc_category.cat_id
+SET price = price * 1.1
+WHERE ccc_category.name = 'Electronics';
+
+GROUP BY:
+---------
+SELECT category, AVG(price) AS average_price
+FROM ccc_product
+GROUP BY category;
+
+
+SELECT category, product_type, COUNT(*) AS product_count
+FROM ccc_product
+GROUP BY category, product_type;
+
+
+INSERT and INSERT ON DUPLICATE:
+-------------------------------
+INSERT INTO ccc_category (cat_id, name) VALUES (10, 'Sports') 
+ON DUPLICATE KEY UPDATE name = VALUES(name);
+
+
+offset/Findinset
+insert ignore
+insert Duplicate --> Unique key--> wit sombination same(
+Where and In
+
+
+--------------------------
+SELECT c1.cat_id, c1.name, COUNT(c2.category) AS ProductCount
+FROM ccc_category AS c1
+LEFT JOIN ccc_product AS c2 ON c1.cat_id = c2.category
+GROUP BY c1.cat_id;
+
+-----------------------------
+
+SELECT
+    c1.cat_id,
+    c1.name,
+    COUNT(c2.category) AS ProductCount,
+    GROUP_CONCAT(c2.product_name) AS ConcatenatedProductNames
+FROM
+    ccc_category AS c1
+LEFT JOIN ccc_product AS c2
+ON
+    c1.cat_id = c2.category
+GROUP BY
+    c1.cat_id;
+
+
+(Ama simple jo koi cat_id vali product available nay joy to simple NUll Jase)
+----------------------------------
+
+SELECT
+    c1.cat_id,
+    c1.name,
+    COUNT(c2.category) AS ProductCount,
+    GROUP_CONCAT(c2.product_name) AS ConcatenatedProductNames,
+    c2.price,
+    RANK() OVER (ORDER BY c2.price ASC)
+FROM
+    ccc_category AS c1
+LEFT JOIN ccc_product AS c2
+ON
+    c1.cat_id = c2.category
+GROUP BY
+    c1.cat_id;
+
+------------------------------------
+
+INSERT INTO ccc_product (`id`, `product_name`) 
+VALUES (130, 'JINIL PRAJAPATI') 
+ON DUPLICATE KEY UPDATE product_name = VALUES(product_name);
+
+
+--------------------------------------
+
+SELECT * from ccc_product
+LIMIT 5 OFFSET 5;
+
+(Ahiya offset ma evu hoy ke limit 5 matlab aapdne 5 values malse ema offset e dekhade ke aa limit cjhalu kayathi thase means first 5 chodi ne chalu thase)
+
+-----------------------------------------
+
+SELECT * FROM ccc_product
+WHERE FIND_IN_SET((SELECT cat_id FROM ccc_category where name= 'Fashion and Apparel'), category);
+(Retrieve products from a specific category named '')

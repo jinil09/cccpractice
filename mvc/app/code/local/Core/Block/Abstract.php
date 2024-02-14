@@ -1,9 +1,9 @@
 <?php
 
-class Core_Block_Abstarct{
+class Core_Block_Abstract{
 
-    private $template;
-    private $data = [];
+    public $template;
+    public $data = [];
 
     public function setTemplate($template) {
         $this->template = $template;
@@ -14,30 +14,30 @@ class Core_Block_Abstarct{
     }
 
     public function __get($key) {
-        return isset($this->data[$key]) ? $this->data[$key] : null;
+        // return isset($this->data[$key]) ? $this->data[$key] : null;
     }
 
     public function __unset($key) {
-        unset($this->data[$key]);
+        // unset($this->data[$key]);
     }
 
     public function __set($key, $value) {
-        $this->data[$key] = $value;
+        // $this->data[$key] = $value;
     }
 
     public function addData($key, $value) {
-        $this->data[$key] = $value;
+        // $this->data[$key] = $value;
     }
 
     public function getData($key = null) {
         // if ($key === null) {
         //     return $this->data;
         // }
-        return isset($this->data[$key]) ? $this->data[$key] : null;
+        // return isset($this->data[$key]) ? $this->data[$key] : null;
     }
 
     public function setData($data) {
-        $this->data = $data;
+        // $this->data = $data;
     }
 
     public function getUrl($action = null, $controller = null, $params = [], $resetParams = false) {
@@ -48,8 +48,7 @@ class Core_Block_Abstarct{
         
     }
 
-    public function render() {
-       
-        include($this->getBaseDir('app') . '/design/frontend/template/' . $this->getTemplate());
+    public function render() { 
+        include(Mage::getBaseDir('app') . '/design/frontend/template/' . $this->getTemplate());
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-class Core_Block_Template{
+class Core_Block_Template extends Core_Block_Abstract{
 
-    private $tamplate;
+    public $template;
 
     public function toHtml(){
-
+        $this->render();
     }
 
     public function addChild($key, $value){
@@ -20,11 +20,4 @@ class Core_Block_Template{
         
     }
 
-    public function setTemplate($template) {
-        $this->template = $template;
-    }
-
-    public function getTemplate() {
-        return $this->template;
-    }
 }

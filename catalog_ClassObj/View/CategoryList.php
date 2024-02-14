@@ -19,7 +19,7 @@ class View_Categorylist{
             $table .= '<tr>';
             $table .= '<td style="width:30px">' . $cat['cat_id'] . '</td>';
             $table .= '<td>' . $cat['name'] . '</td>';
-            $table .= '<td><a href="delete?delete=' . $cat['cat_id'] . '">Delete</a></td>';
+            $table .= '<td><a href="deletec?delete=' . $cat['cat_id'] . '">Delete</a></td>';
             $table .= '</tr>';
         }
 

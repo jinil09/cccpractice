@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h2>Hello Jinil, Welcome!</h2>
+    <form action="" method="Post">
+        <label for="">Product Name :</label>
+        <input type="text" name="name">
+        <input type="submit" value="submit" name="submit">
+    </form>
+    <?php echo $this->getRequest()->getParams('name')?>
+</body>
+</html>

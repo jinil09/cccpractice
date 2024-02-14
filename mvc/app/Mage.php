@@ -6,15 +6,10 @@ class Mage{
     private static $baseDir = 'C:/xampp/htdocs/Practice/mvc';
 
     public static function init(){
-
-        // $uri = new Core_Model_Request();
-        // $uriName = $uri->getRequestUri();
-
+     
+    
         $frontController = new Core_Controller_Front();
         $frontController->init();
-
-        // $request = Mage::getModel('core/request');
-        // echo $request->getRequestUri();
 
     }
 
@@ -25,6 +20,12 @@ class Mage{
     public static function getModel($className){
 
         $className = str_replace("/", "_Model_", $className);
+        $className = ucwords(str_replace("/", "_", $className), '_');
+        return new $className();
+    }
+
+    public static function getBlock($className){
+        $className = str_replace("/", "_Block_", $className);
         $className = ucwords(str_replace("/", "_", $className), '_');
         return new $className();
     }
