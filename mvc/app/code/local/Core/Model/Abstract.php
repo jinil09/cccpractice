@@ -30,7 +30,10 @@ class Core_Model_Abstract{
     }
 
     public function getResource() {
-        
+        $modelClass =  get_Class($this);
+        // $modelClass = 'Product_Model_Resource_Product';
+        $class =substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
+        return new $class;
     }
 
     public function getCollection() {
@@ -79,6 +82,9 @@ class Core_Model_Abstract{
 
     public function load($id, $column=null) {
 
+      
+        print_r($this->getResource());
+        
     }
 
     public function delete() {
