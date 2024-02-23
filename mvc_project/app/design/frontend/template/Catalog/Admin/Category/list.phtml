@@ -1,0 +1,27 @@
+<?php   $listModel =  Mage::getModel('catalog/category')->loadAllData() ;?>
+
+<section class="list">
+<h2>Category List</h2>
+    <table border="1">
+        <tr>
+            <th>Category Id</th>
+            <th>Category Name</th>
+            <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <?php foreach ($listModel as $category): ?>
+            <tr>
+                <td style="width:30px"><?= $category['category_id'] ?></td>
+                <td><?= $category['category_name'] ?></td>
+                <td><?= $category['status'] ?></td>
+                <td><a href="http://localhost/Practice/mvc_project/admin/catalog_category/form?edit=<?= $category['category_id'] ?>">Edit</a></td>
+                <td><a href="http://localhost/Practice/mvc_project/admin/catalog_category/delete?id=<?= $category['category_id'] ?>">Delete</a></td>
+            </tr>
+        <?php endforeach; ?>
+  </table>
+</section>
+
+
+
+

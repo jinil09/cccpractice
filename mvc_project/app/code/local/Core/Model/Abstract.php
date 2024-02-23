@@ -32,23 +32,16 @@ class Core_Model_Abstract{
     }
 
     public function getId() {
-        return $this->_data[$this->getResource()->getPrimaryKey()];
+        return isset($this->_data[$this->getResource()->getPrimaryKey()]) ? $this->_data[$this->getResource()->getPrimaryKey()] :"";
     }
 
     public function getResource() {
-        // $modelClass =  get_Class($this);
-        // $modelClass = 'Product_Model_Resource_Product';
-        // $class =substr($modelClass, 0, strpos($modelClass, '_Model_') + 6) . '_Resource_' . substr($modelClass, strpos($modelClass, '_Model_') + 7);
         return new $this->_resourceClass();
     }
 
     public function getCollection() {
        
     }
-
-    // public function getPrimaryKey() {
-       
-    // }
 
     public function getTableName() {
        
@@ -106,12 +99,24 @@ class Core_Model_Abstract{
     }
 
     public function load($id='', $column=null) {
-        // $this->_data = $this->getResource()->load($id, $column);
-        $this->_data = $this->getResource()->temp_load($id, $column);
+        $this->_data = $this->getResource()->load($id, $column);
+        return $this;
+    }
+// -------------------------------------------------------------
+    public function loadAllData($id='', $column=null) {
+        $rows = $this->getResource()->temp_load($id, $column);
+        return $rows;
+    }
+// -------------------------------------------------------------
+    public function delete($id, $column=null) {
+        if($this->getId() !== "")
+        {
+            $this->getResource()->delete($this);
+        }
         return $this;
     }
 
-    public function delete() {
-        
+    public function update($id, $column=null) {
+        $this->getResource()->updateData($id, $this->_data);
     }
 }

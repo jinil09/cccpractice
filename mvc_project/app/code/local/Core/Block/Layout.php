@@ -20,11 +20,6 @@ class Core_Block_Layout extends Core_Block_Template{
         $head = $this->createBlock('page/Head');
         $this->addChild('head',$head);
 
-
-        $form = $this->createBlock('catalog/admin_product');
-        $this->addChild('form',$form);
-      
-
         $massages = $this->createBlock('core/template');
         $massages->setTemplate('core/massages.phtml');
         $this->addChild('massages',$massages);

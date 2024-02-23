@@ -12,9 +12,11 @@ class Page_Block_Head extends Core_Block_Template{
 
     public function addJs($file){
         $this->_js[] = $file;
+        return $this;
     }
     public function addCss($file){
         $this->_css[] = $file;
+        return $this;
     }
     public function getJs(){
         return $this->_js;
@@ -22,4 +24,5 @@ class Page_Block_Head extends Core_Block_Template{
     public function getCss(){
         return $this->_css;
     }
+
 }

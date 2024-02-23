@@ -9,8 +9,8 @@ class Core_Controller_Front_Action{
 
         if(is_null($this->_layout))
         {
-            $layout = Mage::getBlock('core/layout');
-            return $layout;
+            $this->_layout = Mage::getBlock('core/layout');
+            return $this->_layout;
         }
         return $this->_layout;
     }

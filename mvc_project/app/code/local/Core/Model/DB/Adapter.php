@@ -24,10 +24,6 @@ class Core_Model_DB_Adapter{
             );
         }
         return $this;
-
-        // if (!$this->connect) {
-        //     die("Connection failed: " . mysqli_connect_error());
-        // }
     }
 
     public function fetchAll($query) {
@@ -73,7 +69,8 @@ class Core_Model_DB_Adapter{
     }
 
     public function query($query) {
-       
+        $this->connect();
+        $sql = mysqli_query($this->connect,$query);
     }
 
 
@@ -82,20 +79,16 @@ class Core_Model_DB_Adapter{
     public function fetch_allData($result){
         $this->connect();
         $sql = mysqli_query($this->connect,$result);
-        $column = $rows = [];
+        $rows = [];
         
-        $columnFields = $sql->fetch_fields();
-
-        foreach ($columnFields as $fields) {
-            $this->column[] = $fields->name;
-        }
-
         while ($row = $sql->fetch_assoc()) {
             $this->rows[] = $row;
         }
 
- 
-        $this->table($this->column,$this->rows);
+        // print_r($this->rows);
+        return $this->rows;
+
+        // $this->table($this->column,$this->rows);
     }
 
     public function table($column,$rows){

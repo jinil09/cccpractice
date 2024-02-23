@@ -4,13 +4,12 @@ class Mage{
 
     private static $registry = [] ;
     private static $baseDir = 'C:/xampp/htdocs/Practice/mvc_project';
+    private static $baseUrl = 'http://localhost/Practice/mvc_project';
 
     public static function init(){
-     
     
         $frontController = new Core_Controller_Front();
         $frontController->init();
-
     }
 
     public static function getSingleton($className){
@@ -48,5 +47,14 @@ class Mage{
             return self::$baseDir.'/'.$subDir;
         }
         return self::$baseDir;
+    }
+    
+    public static function getBaseUrl($subUrl = null){
+
+        if($subUrl)
+        {
+            return self::$baseUrl.'/'.$subUrl;
+        }
+        return self::$baseUrl;
     }
 }
