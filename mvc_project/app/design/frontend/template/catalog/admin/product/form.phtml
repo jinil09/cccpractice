@@ -1,5 +1,6 @@
-<?php $productData = $this->getProductData(); 
-$catData = Mage::getModel('catalog/category')->getCollection();
+<?php 
+$productData = $this->getProductData(); 
+$catData = $this->getCategoryData();
 ?>
 <form action="<?php echo Mage::getBaseUrl('admin/catalog_product/save')?>" method="POST" class="form">
 <input type="hidden" name="catalog_product[product_id]" value="<?php echo isset($productData) ? $productData->getProductId() : ''; ?>">
@@ -33,7 +34,15 @@ $catData = Mage::getModel('catalog/category')->getCollection();
         </div>
         <div class="form-col">
             <label for="image_link">Image Link:</label>
-            <input type="text" id="image_link" name="catalog_product[image_link]" value="<?php echo isset($productData) ? $productData->getImageLink() : ''; ?>" >
+            <input type="text" id="image_link" name="catalog_product[link]" value="<?php echo isset($productData) ? $productData->getLink() : ''; ?>" >
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-col">
+            <label for="description">Image Upload:</label>
+            <input type="file" id="image_link" name="catalog_product[image_link]" value="<?php echo isset($productData) ? $productData->getImageLink() : ''; ?>" >
+            <!-- <textarea id="description" name="catalog_product[image_link]" rows="3"><?php echo isset($productData) ? $productData->getDescription() : ''; ?></textarea> -->
         </div>
     </div>
 

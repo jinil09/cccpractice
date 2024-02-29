@@ -94,3 +94,41 @@ select:focus {
         margin-right: 0;
     }
 }
+
+
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+        justify-content: center;
+    }
+
+    .pagination a {
+        text-decoration: none;
+        color: #333;
+        padding: 8px 16px;
+        margin: 0 4px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .pagination a.active,
+    .pagination a:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+    label {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    #per_page {
+        width: 50px;
+        padding: 6px;
+        font-size: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+    }

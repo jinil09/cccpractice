@@ -3,15 +3,38 @@
 class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
 {
 
+
+    protected $_allowedAction = ['form'];
+
     public function getCss()
     {
         $layout = $this->getLayout();
+        $layout->setTemplate('admin/2column.phtml');
+        $child = $layout->getChild('2left');
+        $admin = $layout->createBlock('admin/header');
+
+        $child2 = $layout->getChild('content');
+        $adminHeader = $layout->createBlock('admin/adminheader');
+        $child2->addChild('adminheader', $adminHeader);
+
+
+        $child->addChild('header', $admin);
         $layout->getChild('head')
-            ->addCss('header.css')
-            ->addCss('footer.css')
+            ->addCss('admin/header.css')
             ->addCss('product/form.css')
             ->addCss('product/list.css')
-            ->addCss('1columnMain.css');
+            ->addCss('2columnMain.css');
+    }
+
+
+    public function indexAction()
+    {
+        $layout = $this->getLayout();
+        $this->getCss();
+        $child = $layout->getChild('content');
+        $productForm = $layout->createBlock('catalog/admin_product_form');
+        $child->addChild('form', $productForm);
+        $layout->toHtml();
     }
 
     public function formAction()

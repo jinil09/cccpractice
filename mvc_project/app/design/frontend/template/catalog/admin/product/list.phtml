@@ -1,8 +1,41 @@
-<?php   $productModel =  Mage::getModel('catalog/product')->getCollection(); ?>
-<?php   $catModel =  Mage::getModel('catalog/category')->getCollection(); ?>
+<?php
+
+$productModel = $this->getProductData();
+
+// Retrieve URL parameters
+$perPage = isset($_GET['per_page']) ? (int)$_GET['per_page'] : 5;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Calculate total pages
+$totalRows = count($productModel->getData());
+$totalPages = ceil($totalRows / $perPage);
+
+// Validate current page
+$page = max(1, min($page, $totalPages));
+
+// Calculate offset
+$offset = ($page - 1) * $perPage;
+
+// Get data for the current page (adjusted for last page)
+$currentPageData = array_slice($productModel->getData(), $offset, min($perPage, $totalRows - $offset), true);
+
+// Check if the current page is out of bounds
+if (empty($currentPageData) && $page > 1) {
+    header('Location: ?page=' . ($page - 1) . '&per_page=' . $perPage);
+}
+?>
 
 <section class="list">
-<h2>Product List</h2>
+    <h2>Product List</h2>
+
+    <!-- Rows per page select field -->
+    <label for="per_page">Rows per page:</label>
+    <select id="per_page" name="per_page" onchange="changeRowsPerPage(this)">
+        <option value="5" <?= ($perPage == 5) ? 'selected' : '' ?>>5</option>
+        <option value="10" <?= ($perPage == 10) ? 'selected' : '' ?>>10</option>
+        <option value="15" <?= ($perPage == 15) ? 'selected' : '' ?>>15</option>
+    </select>
+
     <table border="1">
         <tr>
             <th>Product Id</th>
@@ -13,48 +46,49 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        <?php foreach ($productModel->getData() as $product): ?>
-            <!-- <tr> -->
+        <?php foreach ($currentPageData as $product): ?>
             <tr id="row_<?= $product->getProductId() ?>">
                 <td style="width:30px"><?= $product->getProductId() ?></td>
                 <td><?= $product->getName() ?></td>
                 <td><?= $product->getSku() ?></td>
-                <td>
-                <?php
-                    foreach ($catModel->getData() as $category) {
-                        if ($category->getCategoryId() ==  $product->getCategoryId()) {
-                            $categoryName = $category->getCategoryName();
-                            break;
-                        }
-                    }
-                    echo $categoryName;
-                ?>
+                <td>    
+                    <?= $this->getCategoryIdByName($product->getCategoryId())?>
                 </td>
                 <td><?= $product->getStatus() ?></td>
-                <td><a href="http://localhost/Practice/mvc_project/admin/catalog_product/form?id=<?= $product->getProductId() ?>">Edit</a></td>
-                <td><a href="http://localhost/Practice/mvc_project/admin/catalog_product/delete?id=<?= $product->getProductId() ?>">Delete</a></td>
+                <td><a href="<?php echo Mage::getBaseUrl('admin/catalog_product/form?id='. $product->getProductId())  ?>">Edit</a></td>
+                <td><a href="<?php echo Mage::getBaseUrl('admin/catalog_product/delete?id='. $product->getProductId())  ?>">Delete</a></td>
             </tr>
         <?php endforeach; ?>
-  </table>
-  <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            <?php if (($this->getRequest()->getParams('highlighted_id'))): ?>
-            var highlightedId = <?= ($this->getRequest()->getParams('highlighted_id')) ?>;
-            var row = document.getElementById('row_' + highlightedId);
-            if (row) {
-                row.style.backgroundColor = '#4CAF50';
-                row.style.border = '3px solid black';
-                setTimeout(function () {
-                    row.style.backgroundColor = '';
-                    row.style.border = '';
-                }, 4000); 
-                row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-            <?php endif; ?>
-        });
-    </script>
+    </table>
+
+    <!-- Pagination Links -->
+    <div class="pagination">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?page=<?= $i ?>&per_page=<?= $perPage ?>" <?= ($i == $page) ? 'class="active"' : '' ?>><?= $i ?></a>
+        <?php endfor; ?>
+    </div>
 </section>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        <?php if (($this->getRequest()->getParams('highlighted_id'))): ?>
+        var highlightedId = <?= ($this->getRequest()->getParams('highlighted_id')) ?>;
+        var row = document.getElementById('row_' + highlightedId);
+        if (row) {
+            row.style.backgroundColor = '#4CAF50';
+            row.style.border = '3px solid black';
+            setTimeout(function () {
+                row.style.backgroundColor = '';
+                row.style.border = '';
+            }, 4000);
+            row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        <?php endif; ?>
+    });
 
-
-
+    // JavaScript function to handle select change
+    function changeRowsPerPage(select) {
+        var perPage = select.value;
+        window.location.href = '?page=1&per_page=' + perPage;
+    }
+</script>

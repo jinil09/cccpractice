@@ -5,6 +5,7 @@ class Core_Model_Abstract{
     protected $_data = [];
     protected $_resourceClass = '';
     protected $_collectionClass = '';
+    protected $_modelClass = '';
     protected $resource = null;
     protected $collection = null;
 
@@ -18,11 +19,15 @@ class Core_Model_Abstract{
     }
 
     public function setResourceClass($resourceClass) {
-        $this->resourceClass = $resourceClass;
+        $this->_resourceClass = $resourceClass;
     }
 
     public function setCollectionClass($collectionClass) {
-        $this->collectionClass = $collectionClass;
+        $this->_collectionClass = $collectionClass;
+    }
+
+    public function setModelClass($modelClass) {
+        $this->_modelClass = $modelClass;
     }
 
     public function setId($id) {
@@ -39,9 +44,14 @@ class Core_Model_Abstract{
         return new $this->_resourceClass();
     }
 
+    public function getModelClass() {
+        return $this->_modelClass;
+    }
+
     public function getCollection() {
         $collection = new $this->_collectionClass();
         $collection->setResource($this->getResource());
+        $collection->setModelClass($this->getModelClass());
         $collection->select();
         return $collection;
     }
@@ -105,21 +115,12 @@ class Core_Model_Abstract{
         $this->_data = $this->getResource()->load($id, $column);
         return $this;
     }
-// -------------------------------------------------------------
-    public function loadAllData($id='', $column=null) {
-        $rows = $this->getResource()->temp_load($id, $column);
-        return $rows;
-    }
-// -------------------------------------------------------------
+
     public function delete() {
         if($this->getId() !== "")
         {
             $this->getResource()->delete($this);
         }
         return $this;
-    }
-
-    public function update($id, $column=null) {
-        $this->getResource()->updateData($id, $this->_data);
     }
 }

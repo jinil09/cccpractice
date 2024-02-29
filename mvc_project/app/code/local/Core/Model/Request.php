@@ -54,7 +54,7 @@ class Core_Model_Request{
 
     public function getRequestUri(){
         $uri = $_SERVER['REQUEST_URI'];
-        $uri = str_replace("/Practice/mvc_project/","",$uri);
+        $uri = str_replace("/mvc_project/","",$uri);
         if(str_contains($uri, '?'))
         {
             $pos = strpos($uri, '?');
@@ -83,7 +83,7 @@ class Core_Model_Request{
     }
 
     public function getUrl($path){
-        return "http://localhost/Practice/mvc_project/".$path;
+        return "http://localhost/mvc_project/".$path;
     }
 
     public function redirect($url){

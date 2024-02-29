@@ -16,7 +16,7 @@ class Core_Block_Template extends Core_Block_Abstract{
 
     public function removeChild($key){
 
-        if(issse($this->_child[$key]))
+        if(isset($this->_child[$key]))
         {
             unset($this->_child[$key]);
         }
@@ -31,17 +31,36 @@ class Core_Block_Template extends Core_Block_Abstract{
         return  Mage::getModel('core/request');
     }
 
-    public function getChildHtml($key){
-        $html = "";
-        if($key == "" && count($this->_child)){
+    // public function getChildHtml($key){
+    //     $html = "";
+    //     if($key == "" && count($this->_child)){
 
+    //         foreach ($this->_child as $_child) {
+    //             $html .= $_child->toHtml();
+    //         }
+    //     }else{
+    //         $html = $this->getChild($key)->toHtml();
+    //     }
+    //     return $html;
+    // }
+
+    public function getChildHtml($key)
+    {
+        $html = "";
+        if ($key == "") {
             foreach ($this->_child as $_child) {
                 $html .= $_child->toHtml();
             }
-        }else{
+        } elseif ($this->getChild($key)) {
             $html = $this->getChild($key)->toHtml();
+        } else {
+            // Handle the case when the specified key is not found
+            $html = "";
+            // You can also choose to log this information for debugging purposes
+            // Log::info("Child with key '$key' not found.");
         }
-        return $html;
+    return $html;
     }
+
 
 }

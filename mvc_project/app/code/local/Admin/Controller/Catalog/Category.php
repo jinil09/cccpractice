@@ -6,14 +6,22 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
     public function getCss()
     {
         $layout = $this->getLayout();
+        $layout->setTemplate('admin/2column.phtml');
+        $child = $layout->getChild('2left');
+        $admin = $layout->createBlock('admin/header');
+
+        $child2 = $layout->getChild('content');
+        $adminHeader = $layout->createBlock('admin/adminheader');
+        $child2->addChild('adminheader', $adminHeader);
+
+
+        $child->addChild('header', $admin);
         $layout->getChild('head')
-            ->addCss('header.css')
-            ->addCss('footer.css')
+            ->addCss('admin/header.css')
             ->addCss('product/form.css')
             ->addCss('product/list.css')
-            ->addCss('1columnMain.css');
+            ->addCss('2columnMain.css');
     }
-
     public function formAction()
     {
         $layout = $this->getLayout();
@@ -35,19 +43,20 @@ class Admin_Controller_Catalog_Category extends Core_Controller_Front_Action
 
     }
 
-    public function deleteAction(){
+    public function deleteAction()
+    {
         $id = $this->getRequest()->getParams('id');
-        $category = Mage::getModel('catalog/category')->load($id);
-        $category->delete();
+        $category = Mage::getModel('catalog/category')->load($id)
+            ->delete();
         $this->getRequest()->redirect('admin/catalog_category/list');
     }
 
     public function saveAction()
     {
         $data = $this->getRequest()->getParams('catalog_category');
-        $productModel = Mage::getModel('catalog/category');
-        $productModel->setData($data);
-        $productModel->save();
+        $categoryModel = Mage::getModel('catalog/category')
+            ->setData($data)
+            ->save();
         $this->getRequest()->redirect('admin/catalog_category/list');
     }
 

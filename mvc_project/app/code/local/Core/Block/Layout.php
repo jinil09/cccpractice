@@ -20,6 +20,9 @@ class Core_Block_Layout extends Core_Block_Template{
         $head = $this->createBlock('page/Head');
         $this->addChild('head',$head);
 
+        $left2 = $this->createBlock('admin/2columnLeft');
+        $this->addChild('2left',$left2);
+
         $massages = $this->createBlock('core/template');
         $massages->setTemplate('core/massages.phtml');
         $this->addChild('massages',$massages);

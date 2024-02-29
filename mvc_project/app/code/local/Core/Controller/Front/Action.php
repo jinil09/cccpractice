@@ -5,6 +5,14 @@ class Core_Controller_Front_Action{
 
     protected $_layout= null;
 
+
+    public function __construct(){
+        $this->init();
+    }
+
+    public function init(){
+        return $this;
+    }
     public function getLayout(){
 
         if(is_null($this->_layout))

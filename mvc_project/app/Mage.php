@@ -2,9 +2,10 @@
 
 class Mage{
 
-    private static $registry = [] ;
-    private static $baseDir = 'C:/xampp/htdocs/Practice/mvc_project';
-    private static $baseUrl = 'http://localhost/Practice/mvc_project';
+    private static $registry = [];
+    private static $_singleTon= [];      
+    private static $baseDir = 'C:/xampp/htdocs/mvc_project';
+    private static $baseUrl = 'http://localhost/mvc_project';
 
     public static function init(){
     
@@ -13,7 +14,12 @@ class Mage{
     }
 
     public static function getSingleton($className){
-
+        if(isset(self::$_singleTon[$className])){
+            return  self::$_singleTon[$className]; 
+        }
+        else{
+            return self::$_singleTon[$className] = self::getModel($className); 
+        }
     }
 
     public static function getModel($className){
