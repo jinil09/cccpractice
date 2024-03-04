@@ -42,12 +42,16 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
     {
 
         if (!$this->getRequest()->isPost()) {
-            $layout = $this->getLayout();
-            $this->getCss();
-            $child = $layout->getChild('content');
-            $loginForm = $layout->createBlock('customer/account_login');
-            $child->addChild('loginForm', $loginForm);
-            $layout->toHtml();
+            if(Mage::getSingleton('core/session')->get('logged_in_customer_id') == ''){
+                $layout = $this->getLayout();
+                $this->getCss();
+                $child = $layout->getChild('content');
+                $loginForm = $layout->createBlock('customer/account_login');
+                $child->addChild('loginForm', $loginForm);
+                $layout->toHtml();
+            }else{
+                $this->getRequest()->redirect('customer/account/dashboard');
+            }
         } else {
             $data = $this->getRequest()->getParams('login');
             $customerModel = Mage::getSingleton('customer/account')->getCollection()
@@ -96,14 +100,14 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
         }
     }
 
-    public function forgotpasswordAction()
+    public function forgotPasswordAction()
     {
         $layout = $this->getLayout();
     }
 
     public function logoutAction(){
         Mage::getSingleton('core/session')->remove('logged_in_customer_id');
-        $this->getRequest()->redirect('page/index/index');
+        $this->redirect('page/index/index');
     }
 
 }

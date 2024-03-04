@@ -19,4 +19,7 @@ class Page_Block_Header extends Core_Block_Template {
       return $logInOutText;
    }
 
+   public function getCategoryData(){
+      return Mage::getModel('catalog/category')->getCollection();
+   }
 }

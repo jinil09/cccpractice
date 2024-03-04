@@ -2,7 +2,7 @@
 $productData = $this->getProductData(); 
 $catData = $this->getCategoryData();
 ?>
-<form action="<?php echo Mage::getBaseUrl('admin/catalog_product/save')?>" method="POST" class="form">
+<form action="<?php echo Mage::getBaseUrl('admin/catalog_product/save')?>" method="POST" class="form" enctype="multipart/form-data">
 <input type="hidden" name="catalog_product[product_id]" value="<?php echo isset($productData) ? $productData->getProductId() : ''; ?>">
 
     <div class="form-row">

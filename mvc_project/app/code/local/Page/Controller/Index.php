@@ -11,24 +11,17 @@ class Page_Controller_Index extends Core_Controller_Front_Action
         $layout->getChild('head')->addCss('header.css');
         $layout->getChild('head')->addCss('footer.css');
         $layout->getChild('head')->addCss('1columnMain.css');
+        $layout->getChild('head')->addCss('banner/banner.css');
     }
 
     public function indexAction()
     {
         $layout = $this->getLayout();
         $this->getCss();
-        $banner = $layout->createBlock('core/template')
-            ->setTemplate('banner/banner.phtml');
+        $banner = $layout->createBlock('banner/banner');
         $content = $layout->getChild('content')
-            ->addChild('banner', $banner)
-            ->addChild('banner1', $banner);
-
+            ->addChild('banner', $banner);
         $layout->toHtml();
-    }
-
-    public function saveAction()
-    {
-        $leyout = $this->getLayout()->toHtml();
     }
 
 }

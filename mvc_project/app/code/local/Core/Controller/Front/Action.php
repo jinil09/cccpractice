@@ -27,4 +27,8 @@ class Core_Controller_Front_Action{
         return  Mage::getModel('core/request');
     }
 
+    public function redirect($url){
+        return header("Location: " . Mage::getBaseUrl($url));
+    }
+
 }

@@ -36,7 +36,6 @@ class Core_Model_Resource_Abstract
     public function save($dataValue)
     {
         $data = $dataValue->getData();
-        // print_r($dataValue->getId());
         if ($dataValue->getId() !== "") {
             $updateQu = $this->updateData($dataValue->getId(), $data);
             return $this->getAdapter()->query($updateQu);

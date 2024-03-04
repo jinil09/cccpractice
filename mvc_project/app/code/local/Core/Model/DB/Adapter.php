@@ -62,7 +62,6 @@ class Core_Model_DB_Adapter
     {
         $sql = mysqli_query($this->connect(), $query);
         if ($sql) {
-            echo "Data Update Succsessfully!";
             return mysqli_insert_id($this->connect);
         } else {
             return FALSE;

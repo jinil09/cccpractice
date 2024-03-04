@@ -42,7 +42,7 @@ class Mage{
 
     public static function registry($key){
 
-        return isset(self::$registry[$key]) ? self::$registry[key] : null;
+        return isset(self::$registry[$key]) ? self::$registry[$key] : null;
 
     }
 

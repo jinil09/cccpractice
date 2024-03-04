@@ -14,9 +14,14 @@ class Admin_Block_Adminheader extends Core_Block_Template {
         if($action == 'catalog_product'){
             $this->text = 'Add New Product';
             $this->link = Mage::getBaseUrl('admin/catalog_product/form');
-        }else{
+        }elseif ($action == 'banner') {
+            $this->text = 'Add New Banner';
+            $this->link = Mage::getBaseUrl('admin/banner/form');
+        }elseif  ($action == 'catalog_category') {
             $this->text = 'Add New Category';
             $this->link = Mage::getBaseUrl('admin/catalog_category/form');
+        }else{
+            $this->text = '';
         }
     }
 }
