@@ -8,7 +8,7 @@ class Core_Model_DB_Adapter
         "host" => "localhost",
         "user" => "root",
         "password" => "",
-        "db" => "ccc_project"
+        "db" => "ccc_eval"
     ];
     public $connect = null;
 

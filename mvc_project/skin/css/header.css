@@ -116,3 +116,28 @@
     border-radius: 10px;
     background-color: #555;
 }
+
+.cart-button {
+    position: relative;
+    text-decoration: none;
+    color: #333; /* Adjust the color as needed */
+}
+
+.cart-icon-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 5px; /* Adjust spacing as needed */
+}
+
+.fa-shopping-cart {
+    font-size: 24px; /* Adjust the icon size as needed */
+}
+
+.cart-item-count {
+    margin-left: 3pxs;
+    background-color: #ff5252; /* Adjust the background color as needed */
+    color: #fff; /* Adjust the text color as needed */
+    font-size: 12px; /* Adjust the font size as needed */
+    padding: 2px 6px; /* Adjust padding as needed */
+    border-radius: 50%; /* Make it a circle */
+}

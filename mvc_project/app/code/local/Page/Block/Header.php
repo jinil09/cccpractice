@@ -22,4 +22,10 @@ class Page_Block_Header extends Core_Block_Template {
    public function getCategoryData(){
       return Mage::getModel('catalog/category')->getCollection();
    }
+
+   public function getItemData(){
+      $quoteId = Mage::getSingleton('core/session')->get('quote_id');
+      return Mage::getModel('sales/quote_item')->getCollection()
+          ->addFieldToFilter('quote_id', $quoteId);
+   }
 }
