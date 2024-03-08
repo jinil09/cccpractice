@@ -1,0 +1,72 @@
+<?php $itemData = $this->getItemData();
+$checkItemData = $this->checkCart();
+$quoteId = $this->getItemData()->getFirstItem();
+$totalQty = 0;
+?>
+
+<main class="cart">
+
+
+    <div class="Cart-Container">
+
+
+        <?php if (empty($checkItemData)): ?>
+            <p>Your Cart is feeling empty. Please add some goods.</p>
+        <?php else: ?>
+
+            <div class="Header">
+                <h3 class="Heading">Shopping Cart</h3>
+                <h5 class="Action">Remove all</h5>
+            </div>
+
+            <?php foreach ($itemData->getData() as $item): ?>
+                <div class="Cart-Items">
+                    <div class="image-box">
+                        <img src="<?php echo Mage::getBaseUrl('media/product/') . $this->getProduct($item->getProductId())->getImageLink() ?>"
+                            style="height:80px" />
+                    </div>
+                    <div class="about">
+                        <h1 class="title">
+                            <?php echo $this->getProduct($item->getProductId())->getName() ?>
+                        </h1>
+                        <!-- <h3 class="subtitle">250ml</h3> -->
+                    </div>
+                    <div class="counter">
+                        <form action="<?php echo Mage::getBaseUrl('sales/quote/update') ?>" method="post">
+                            <input type="hidden" name="item_id" value="<?php echo $item->getItemId(); ?>">
+                            <input type="number" name="new_qty" value="<?php echo $item->getQty() ?>" min="1" class="count" required>
+                            <input type="submit" value="Update">
+                        </form>
+                    </div>
+
+                    <div class="prices">
+                        <div class="amount">
+                            <?php echo $item->getPrice(); ?>
+                        </div>
+                        <div class="save"><a>Cost (<?php echo $item->getQty() * $item->getPrice(); ?>)</a></div>
+                        <div class="remove"><a
+                                href="<?php echo Mage::getBaseUrl('sales/quote/delete?id=' . $item->getItemId()) ?>">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+
+            <hr>
+            <div class="checkout">
+                <div class="total">
+                    <div>
+                        <div class="Subtotal">Sub-Total</div>
+                        <div class="items">
+                            <?php echo sizeof($this->getItemData()->getData()) ?> - item
+                        </div>
+                    </div>
+                    <div class="total-amount">
+                        <?php echo $this->getQuoteData($quoteId->getQuoteId())->getGrandTotal(); ?>
+                    </div>
+                </div>
+                <button class="button">Checkout</button>
+            </div>
+        <?php endif; ?>
+    </div>
+</main>
